@@ -1,0 +1,22 @@
+  {name}:
+      description: |
+        A paginated collection of {tag-plural-kebab}.
+      type: object
+      additionalProperties: false
+      nullable: false
+      required:
+        - meta
+        - items
+      properties:
+        meta:
+          $ref: "#/components/schemas/Pagination"
+        items:
+          $ref: "#/components/schemas/{tag-plural}"
+  {tag-plural}:
+      description: |
+        A collection of {name-lower}.
+      type: array
+      nullable: false
+      uniqueItems: true
+      items:
+        $ref: "#/components/schemas/{tag}"

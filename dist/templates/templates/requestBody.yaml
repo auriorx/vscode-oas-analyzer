@@ -1,0 +1,8 @@
+  {name}:
+        description: |
+          The request for `{name-no-postfix}`
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/{tag}.{type}"
+        required: true

@@ -1,0 +1,127 @@
+  /{tag-kebab-plural}:
+    get:
+      tags:
+        - {tag}
+      summary: Retrieve existing {tag-kebab-plural-lower}.
+      description: |
+        Retrieve existing {tag-kebab-plural-lower}.
+      operationId: Get{tag-plural}
+      parameters:
+        - $ref: "#/components/parameters/Limit"
+        - $ref: "#/components/parameters/Offset"
+        - $ref: "#/components/parameters/SortDirection"
+        - $ref: "#/components/parameters/SortBy"
+        - $ref: "#/components/parameters/CorrelationId"
+      responses:
+        "200":
+          $ref: "#/components/responses/Get{tag-plural}Response"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableResponse"
+    post:
+      tags:
+        - {tag}
+      summary: Create a new {tag-kebab-lower}.
+      description: |
+        Create a new {tag-kebab-lower}.
+      operationId: Post{tag-plural}
+      parameters:
+        - $ref: "#/components/parameters/CorrelationId"
+      requestBody:
+        $ref: "#/components/requestBodies/Post{tag-plural}Request"
+      responses:
+        "201":
+          $ref: "#/components/responses/CreatedResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableResponse"
+  /{tag-kebab-plural}/{{tag-kebab}Id}:
+    get:
+      tags:
+        - {tag}
+      summary: Retrieve an existing {tag-kebab-lower}.
+      description: |
+        Retrieve an existing {tag-kebab-lower}.
+      operationId: Get{tag}
+      parameters:
+        - $ref: "#/components/parameters/{tag}Id"
+        - $ref: "#/components/parameters/CorrelationId"
+      responses:
+        "200":
+          $ref: "#/components/responses/Get{tag}Response"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableResponse"
+    put:
+      tags:
+        - {tag}
+      summary: Update an existing {tag-kebab-lower}.
+      description: |
+        Update an existing {tag-kebab-lower}.
+      operationId: Put{tag}
+      parameters:
+        - $ref: "#/components/parameters/{tag}Id"
+        - $ref: "#/components/parameters/CorrelationId"
+      requestBody:
+        $ref: "#/components/requestBodies/Put{tag}Request"
+      responses:
+        "204":
+          $ref: "#/components/responses/NoContentResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableResponse"
+    delete:
+      tags:
+        - {tag}
+      summary: Delete an existing {tag-kebab-lower}.
+      description: |
+        Delete an existing {tag-kebab-lower}.
+      operationId: Delete{tag}
+      parameters:
+        - $ref: "#/components/parameters/{tag}Id"
+        - $ref: "#/components/parameters/CorrelationId"
+      responses:
+        "204":
+          $ref: "#/components/responses/NoContentResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableResponse"

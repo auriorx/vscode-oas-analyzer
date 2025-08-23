@@ -1,0 +1,54 @@
+{
+    "name": "oas-analyzer",
+    "displayName": "OAS Analyzer",
+    "description": "Analyze OAS3 YAML files and code generate missing components",
+    "version": "0.0.2",
+    "publisher": "JayTech",
+    "icon": "logo.png",
+    "engines": {
+        "vscode": "^1.85.0"
+    },
+    "main": "./dist/extension.js",
+    "activationEvents": [
+        "onCommand:oasAnalyzer.expandInlineShortcut",
+        "onLanguage:yaml"
+    ],
+    "contributes": {
+        "commands": [
+            {
+                "command": "oasAnalyzer.expandInlineShortcut",
+                "title": "Expand OpenAPI Inline Path Shortcut"
+            }
+        ],
+        "languages": [
+            {
+                "id": "yaml",
+                "aliases": [
+                    "YAML"
+                ],
+                "extensions": [
+                    ".yaml",
+                    ".yml"
+                ]
+            }
+        ]
+    },
+    "scripts": {
+        "compile": "tsc -p ./ && npm run copy-templates",
+        "copy-templates": "cp -r src/templates dist/templates",
+        "vscode:prepublish": "tsc -p ./"
+    },
+    "devDependencies": {
+        "@types/lodash": "^4.17.16",
+        "@types/node": "^20.0.0",
+        "@types/pluralize": "^0.0.33",
+        "@types/vscode": "^1.85.0",
+        "@vscode/vsce": "^2.15.0",
+        "typescript": "^5.3.3"
+    },
+    "dependencies": {
+        "lodash": "^4.17.21",
+        "pluralize": "^8.0.0",
+        "yaml": "^2.8.0"
+    }
+}

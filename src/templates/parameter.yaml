@@ -1,0 +1,10 @@
+  {tag}Id:
+      name: {tag-lower}Id
+      in: path
+      description: |
+        The unique identifier of a {tag-lower}.
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: cd63332c-6a07-4962-ae35-c447bd116682

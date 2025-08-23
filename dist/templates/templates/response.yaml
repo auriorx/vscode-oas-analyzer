@@ -1,0 +1,10 @@
+  {name}:
+      description: |
+        The response of `{name-no-postfix}`
+      headers:
+        x-correlation-id:
+          $ref: "#/components/headers/x-correlation-id"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/{schemaType}"

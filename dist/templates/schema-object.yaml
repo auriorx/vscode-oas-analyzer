@@ -1,0 +1,13 @@
+  {name}:
+      description: |
+        The definition of a(n) {name-lower}.
+      type: object
+      additionalProperties: false
+      nullable: true
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          format: uuid
+          nullable: false
