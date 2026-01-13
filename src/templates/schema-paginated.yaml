@@ -11,7 +11,7 @@
         meta:
           $ref: "#/components/schemas/Pagination"
         items:
-          $ref: "#/components/schemas/{tag-plural}"
+          $ref: "#/components/schemas/{tag}"
   {tag-plural}:
       description: |
         A collection of {name-lower}.
