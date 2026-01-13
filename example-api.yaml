@@ -1,0 +1,26 @@
+openapi: 3.0.3
+info:
+  title: ignitia-platform-v1
+  description: |
+    The OAS3 documentation for the ignitia-platform-v1 API.
+  version: "1.0.0"
+  contact:
+    name: Ignitia
+    url: https://ignitia.nl
+security:
+  - bearerAuth: []
+tags:
+
+paths:
+  
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+  requestBodies:
+  responses:
+  headers:
+  schemas:

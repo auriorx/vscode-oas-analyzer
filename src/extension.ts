@@ -14,18 +14,23 @@ export function activate(context: vscode.ExtensionContext) {
       const now = Date.now();
 
       const result = await expandInlinePathShortcutIfMatched(event);
+      console.log(`📊 Expansion result:`, result);
       if (
         result?.tag &&
         result.auto &&
         (result.tag !== lastTagGenerated || now - lastTimestamp > 1000)
       ) {
+        console.log(`🎯 Triggering component generation for tag: ${result.tag}`);
         lastTagGenerated = result.tag;
         lastTimestamp = now;
 
         // Add a short delay to avoid race conditions with formatting
         setTimeout(async () => {
+          console.log(`⏰ Calling generateMissingRefs for tag: ${result.tag}`);
           await generateMissingRefs(event.document, result.tag);
         }, 100);
+      } else {
+        console.log(`⏭️ Skipping component generation - result.tag=${result?.tag}, result.auto=${result?.auto}, sameasLast=${result?.tag === lastTagGenerated}`);
       }
     })
   );

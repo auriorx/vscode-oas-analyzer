@@ -2,8 +2,8 @@
     "name": "oas-analyzer",
     "displayName": "OAS Analyzer",
     "description": "Analyze OAS3 YAML files and code generate missing components",
-    "version": "0.0.2",
-    "publisher": "JayTech",
+    "version": "0.1.0",
+    "publisher": "jaytech",
     "icon": "logo.png",
     "engines": {
         "vscode": "^1.85.0"
@@ -35,15 +35,21 @@
     },
     "scripts": {
         "compile": "tsc -p ./ && npm run copy-templates",
-        "copy-templates": "cp -r src/templates dist/templates",
-        "vscode:prepublish": "tsc -p ./"
+        "copy-templates": "node -e \"require('fs').cpSync('src/templates', 'dist/templates', {recursive: true})\"",
+        "vscode:prepublish": "tsc -p ./",
+        "test": "npm run compile && node dist/test/runTest.js"
     },
     "devDependencies": {
+        "@types/glob": "^8.1.0",
         "@types/lodash": "^4.17.16",
+        "@types/mocha": "^10.0.6",
         "@types/node": "^20.0.0",
         "@types/pluralize": "^0.0.33",
         "@types/vscode": "^1.85.0",
+        "@vscode/test-electron": "^2.3.9",
         "@vscode/vsce": "^2.15.0",
+        "glob": "^10.3.10",
+        "mocha": "^10.2.0",
         "typescript": "^5.3.3"
     },
     "dependencies": {

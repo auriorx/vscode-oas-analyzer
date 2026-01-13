@@ -54,15 +54,21 @@ function activate(context) {
     context.subscriptions.push(vscode.workspace.onDidChangeTextDocument((event) => __awaiter(this, void 0, void 0, function* () {
         const now = Date.now();
         const result = yield (0, ExpandInlinePathShortcut_1.expandInlinePathShortcutIfMatched)(event);
+        console.log(`📊 Expansion result:`, result);
         if ((result === null || result === void 0 ? void 0 : result.tag) &&
             result.auto &&
             (result.tag !== lastTagGenerated || now - lastTimestamp > 1000)) {
+            console.log(`🎯 Triggering component generation for tag: ${result.tag}`);
             lastTagGenerated = result.tag;
             lastTimestamp = now;
             // Add a short delay to avoid race conditions with formatting
             setTimeout(() => __awaiter(this, void 0, void 0, function* () {
+                console.log(`⏰ Calling generateMissingRefs for tag: ${result.tag}`);
                 yield (0, ComponentGenerator_1.generateMissingRefs)(event.document, result.tag);
             }), 100);
+        }
+        else {
+            console.log(`⏭️ Skipping component generation - result.tag=${result === null || result === void 0 ? void 0 : result.tag}, result.auto=${result === null || result === void 0 ? void 0 : result.auto}, sameasLast=${(result === null || result === void 0 ? void 0 : result.tag) === lastTagGenerated}`);
         }
     })));
     // 🎯 Optional: Manual trigger from F1 or keybinding

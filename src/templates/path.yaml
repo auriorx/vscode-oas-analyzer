@@ -7,10 +7,9 @@
         Retrieve existing {tag-kebab-plural-lower}.
       operationId: Get{tag-plural}
       parameters:
-        - $ref: "#/components/parameters/Limit"
-        - $ref: "#/components/parameters/Offset"
-        - $ref: "#/components/parameters/SortDirection"
-        - $ref: "#/components/parameters/SortBy"
+        - $ref: "#/components/parameters/PaginationLimit"
+        - $ref: "#/components/parameters/PaginationOffset"
+        - $ref: "#/components/parameters/Sort.{tag-plural}"
         - $ref: "#/components/parameters/CorrelationId"
       responses:
         "200":
@@ -49,7 +48,7 @@
           $ref: "#/components/responses/InternalServerErrorResponse"
         "503":
           $ref: "#/components/responses/ServiceUnavailableResponse"
-  /{tag-kebab-plural}/{{tag-kebab}Id}:
+  /{tag-kebab-plural}/{{tag-kebab-lower}Id}:
     get:
       tags:
         - {tag}

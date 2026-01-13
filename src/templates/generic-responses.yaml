@@ -1,0 +1,88 @@
+BadRequestResponse:
+  description: |
+    The response of a bad request.
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/ErrorResponse"
+  headers:
+    x-correlation-id:
+      $ref: "#/components/headers/x-correlation-id"
+ConflictResponse:
+  description: |
+    The response of a conflict (HTTP 409)
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/ErrorResponse"
+  headers:
+    x-correlation-id:
+      $ref: "#/components/headers/x-correlation-id"
+CreatedResponse:
+  description: |
+    The response for all creation operations.
+  headers:
+    x-correlation-id:
+      $ref: "#/components/headers/x-correlation-id"
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/CreatedResource"
+ForbiddenResponse:
+  description: >
+    A response indicating a user is not authorized to access a resource
+    (HTTP 403)
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/ErrorResponse"
+  headers:
+    x-correlation-id:
+      $ref: "#/components/headers/x-correlation-id"
+InternalServerErrorResponse:
+  description: |
+    The response of an internal server error
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/ErrorResponse"
+  headers:
+    x-correlation-id:
+      $ref: "#/components/headers/x-correlation-id"
+NoContentResponse:
+  description: >
+    The response in case a request was processed successfully, but there's
+    no content
+  headers:
+    x-correlation-id:
+      $ref: "#/components/headers/x-correlation-id"
+NotFoundResponse:
+  description: |
+    The response in case the requested resource is not found
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/ErrorResponse"
+  headers:
+    x-correlation-id:
+      $ref: "#/components/headers/x-correlation-id"
+ServiceUnavailableResponse:
+  description: |
+    The response in the service is unavailable
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/ErrorResponse"
+  headers:
+    x-correlation-id:
+      $ref: "#/components/headers/x-correlation-id"
+UnauthorizedResponse:
+  description: |
+    The response in case the caller is not authorized
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/ErrorResponse"
+  headers:
+    x-correlation-id:
+      $ref: "#/components/headers/x-correlation-id"

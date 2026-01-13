@@ -1,0 +1,514 @@
+openapi: 3.0.3
+info:
+  title: ignitia-platform-v1
+  description: |
+    The OAS3 documentation for the ignitia-platform-v1 API.
+  version: "{{OAS_VERSION}}"
+  contact:
+    name: Ignitia
+    url: https://ignitia.nl
+security:
+  - bearerAuth: []
+tags:
+  - name: PlatformUser
+    description: |
+      Operations regarding a platform users.
+paths:
+  /platform-users:
+    get:
+      tags:
+        - PlatformUser
+      summary: Retrieve existing platformusers.
+      description: |
+        Retrieve existing platformusers.
+      operationId: GetPlatformUsers
+      parameters:
+        - $ref: "#/components/parameters/PaginationLimit"
+        - $ref: "#/components/parameters/PaginationOffset"
+        - $ref: "#/components/parameters/Sort.PlatformUsers"
+        - $ref: "#/components/parameters/CorrelationId"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetPlatformUsersResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableResponse"
+    post:
+      tags:
+        - PlatformUser
+      summary: Create a new platformuser.
+      description: |
+        Create a new platformuser.
+      operationId: PostPlatformUsers
+      parameters:
+        - $ref: "#/components/parameters/CorrelationId"
+      requestBody:
+        $ref: "#/components/requestBodies/PostPlatformUsersRequest"
+      responses:
+        "201":
+          $ref: "#/components/responses/CreatedResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableResponse"
+  /platform-users/{platformuserId}:
+    get:
+      tags:
+        - PlatformUser
+      summary: Retrieve an existing platformuser.
+      description: |
+        Retrieve an existing platformuser.
+      operationId: GetPlatformUser
+      parameters:
+        - $ref: "#/components/parameters/PlatformUserId"
+        - $ref: "#/components/parameters/CorrelationId"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetPlatformUserResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableResponse"
+    put:
+      tags:
+        - PlatformUser
+      summary: Update an existing platformuser.
+      description: |
+        Update an existing platformuser.
+      operationId: PutPlatformUser
+      parameters:
+        - $ref: "#/components/parameters/PlatformUserId"
+        - $ref: "#/components/parameters/CorrelationId"
+      requestBody:
+        $ref: "#/components/requestBodies/PutPlatformUserRequest"
+      responses:
+        "204":
+          $ref: "#/components/responses/NoContentResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableResponse"
+    delete:
+      tags:
+        - PlatformUser
+      summary: Delete an existing platformuser.
+      description: |
+        Delete an existing platformuser.
+      operationId: DeletePlatformUser
+      parameters:
+        - $ref: "#/components/parameters/PlatformUserId"
+        - $ref: "#/components/parameters/CorrelationId"
+      responses:
+        "204":
+          $ref: "#/components/responses/NoContentResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerErrorResponse"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailableResponse"
+
+
+components:
+  securitySchemes:
+  bearerAuth:
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+
+  parameters:
+  CorrelationId:
+  description: |
+    An identifier to provide in order to track your request.
+  in: header
+  required: false
+  name: x-correlation-id
+  schema:
+    type: string
+    example: 661077bb-375f-4500-b5aa-0ef18807add6
+PaginationLimit:
+  name: limit
+  in: query
+  required: false
+  description: |
+    Maximum number of items to return.
+    If omitted, the server applies a default.
+  schema:
+    type: integer
+    format: int32
+    minimum: 1
+    maximum: 200
+    default: 20
+    example: 20
+PaginationOffset:
+  name: offset
+  in: query
+  required: false
+  description: |
+    Number of items to skip before starting to collect the result set.
+  schema:
+    type: integer
+    format: int32
+    minimum: 0
+    default: 0
+    example: 0
+
+    PlatformUserId:
+      name: platform-userId
+      in: path
+      description: |
+        The unique identifier of a platformuser.
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: cd63332c-6a07-4962-ae35-c447bd116682
+    Sort.PlatformUsers:
+      name: sort
+      in: query
+      required: false
+      style: form
+      explode: false
+      description: |
+        Sort tokens in priority order.
+        Values are provided as a comma-separated list.
+        Each field may appear at most once (e.g., do not provide both IdAsc and IdDesc).
+        Example: ?sort=IdDesc
+      schema:
+        $ref: "#/components/schemas/Sort.PlatformUsers"
+
+
+  requestBodies:
+    PostPlatformUsersRequest:
+        description: |
+          The request for `PostPlatformUsers`
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlatformUser.New"
+        required: true
+    PutPlatformUserRequest:
+        description: |
+          The request for `PutPlatformUser`
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlatformUser.Updated"
+        required: true
+
+  responses:
+  BadRequestResponse:
+  description: |
+    The response of a bad request.
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/ErrorResponse"
+  headers:
+    x-correlation-id:
+      $ref: "#/components/headers/x-correlation-id"
+ConflictResponse:
+  description: |
+    The response of a conflict (HTTP 409)
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/ErrorResponse"
+  headers:
+    x-correlation-id:
+      $ref: "#/components/headers/x-correlation-id"
+CreatedResponse:
+  description: |
+    The response for all creation operations.
+  headers:
+    x-correlation-id:
+      $ref: "#/components/headers/x-correlation-id"
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/CreatedResource"
+ForbiddenResponse:
+  description: >
+    A response indicating a user is not authorized to access a resource
+    (HTTP 403)
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/ErrorResponse"
+  headers:
+    x-correlation-id:
+      $ref: "#/components/headers/x-correlation-id"
+InternalServerErrorResponse:
+  description: |
+    The response of an internal server error
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/ErrorResponse"
+  headers:
+    x-correlation-id:
+      $ref: "#/components/headers/x-correlation-id"
+NoContentResponse:
+  description: >
+    The response in case a request was processed successfully, but there's
+    no content
+  headers:
+    x-correlation-id:
+      $ref: "#/components/headers/x-correlation-id"
+NotFoundResponse:
+  description: |
+    The response in case the requested resource is not found
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/ErrorResponse"
+  headers:
+    x-correlation-id:
+      $ref: "#/components/headers/x-correlation-id"
+ServiceUnavailableResponse:
+  description: |
+    The response in the service is unavailable
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/ErrorResponse"
+  headers:
+    x-correlation-id:
+      $ref: "#/components/headers/x-correlation-id"
+UnauthorizedResponse:
+  description: |
+    The response in case the caller is not authorized
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/ErrorResponse"
+  headers:
+    x-correlation-id:
+      $ref: "#/components/headers/x-correlation-id"
+
+    GetPlatformUserResponse:
+      description: |
+        The response of `GetPlatformUser`
+      headers:
+        x-correlation-id:
+          $ref: "#/components/headers/x-correlation-id"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PlatformUser"
+    GetPlatformUsersResponse:
+      description: |
+        The response of `GetPlatformUsers`
+      headers:
+        x-correlation-id:
+          $ref: "#/components/headers/x-correlation-id"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PaginatedPlatformUsers"
+
+  headers:
+  x-correlation-id:
+  description: |
+    The x-correlation-id containing an identifier for a request.
+  required: true
+  schema:
+    type: string
+    format: uuid
+    example: 661077bb-375f-4500-b5aa-0ef18807add6
+
+
+  schemas:
+  CreatedResource:
+  description: |
+    The response returned when a resource has been created.
+  type: object
+  additionalProperties: false
+  nullable: false
+  properties:
+    id:
+      type: string
+      format: uuid
+      nullable: false
+ErrorResponse:
+  description: |
+    The generic error response which will be returned in case of a failure
+  type: object
+  nullable: true
+  additionalProperties: false
+  properties:
+    message:
+      description: |
+        The error message
+      type: string
+      nullable: true
+    details:
+      $ref: "#/components/schemas/ErrorResponse.Details"
+ErrorResponse.Details:
+  description: |
+    The details of an error
+  type: object
+  additionalProperties: true
+  nullable: true
+Pagination:
+  description: |
+    Pagination metadata.
+  type: object
+  additionalProperties: false
+  nullable: false
+  required:
+    - limit
+    - offset
+    - sort
+    - hasNextPage
+    - hasPreviousPage
+    - currentPage
+  properties:
+    limit:
+      type: integer
+      format: int32
+      nullable: false
+      minimum: 1
+    offset:
+      type: integer
+      format: int32
+      nullable: false
+      minimum: 0
+    total:
+      type: integer
+      format: int32
+      minimum: 0
+      nullable: false
+    sort:
+      type: string
+      nullable: false
+      description: The applied sort token.
+    hasNextPage:
+      type: boolean
+      nullable: false
+    hasPreviousPage:
+      type: boolean
+      nullable: false
+    currentPage:
+      type: integer
+      format: int32
+      minimum: 1
+      nullable: false
+      description: 1-indexed page derived from offset/limit.
+    totalPages:
+      type: integer
+      format: int32
+      minimum: 1
+      nullable: false
+
+    PlatformUser:
+      description: |
+        The definition of a(n) platformuser.
+      type: object
+      additionalProperties: false
+      nullable: true
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          format: uuid
+          nullable: false
+    PlatformUser.Updated:
+      description: |
+        The definition of a(n) platformuser.updated.
+      type: object
+      additionalProperties: false
+      nullable: true
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          format: uuid
+          nullable: false
+    PlatformUsers.New:
+      description: |
+        The definition of a(n) platformusers.new.
+      type: object
+      additionalProperties: false
+      nullable: true
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          format: uuid
+          nullable: false
+    PaginatedPlatformUsers:
+      description: |
+        A paginated collection of platform-users.
+      type: object
+      additionalProperties: false
+      nullable: false
+      required:
+        - meta
+        - items
+      properties:
+        meta:
+          $ref: "#/components/schemas/Pagination"
+        items:
+          $ref: "#/components/schemas/PlatformUsers"
+  PlatformUsers:
+      description: |
+        A collection of paginatedplatformusers.
+      type: array
+      nullable: false
+      uniqueItems: true
+      items:
+        $ref: "#/components/schemas/PlatformUser"
+    Sort.PlatformUser:
+      description: Sort token for platform-user listing.
+      type: string
+      nullable: false
+      enum:
+        - IdAsc
+        - IdDesc
+  Sort.PlatformUsers:
+      description: |
+        Sort tokens in priority order.
+      type: array
+      nullable: false
+      uniqueItems: true
+      maxItems: 5
+      items:
+        $ref: "#/components/schemas/Sort.PlatformUser"
+

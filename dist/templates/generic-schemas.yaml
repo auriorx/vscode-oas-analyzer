@@ -1,0 +1,81 @@
+CreatedResource:
+  description: |
+    The response returned when a resource has been created.
+  type: object
+  additionalProperties: false
+  nullable: false
+  properties:
+    id:
+      type: string
+      format: uuid
+      nullable: false
+ErrorResponse:
+  description: |
+    The generic error response which will be returned in case of a failure
+  type: object
+  nullable: true
+  additionalProperties: false
+  properties:
+    message:
+      description: |
+        The error message
+      type: string
+      nullable: true
+    details:
+      $ref: "#/components/schemas/ErrorResponse.Details"
+ErrorResponse.Details:
+  description: |
+    The details of an error
+  type: object
+  additionalProperties: true
+  nullable: true
+Pagination:
+  description: |
+    Pagination metadata.
+  type: object
+  additionalProperties: false
+  nullable: false
+  required:
+    - limit
+    - offset
+    - sort
+    - hasNextPage
+    - hasPreviousPage
+    - currentPage
+  properties:
+    limit:
+      type: integer
+      format: int32
+      nullable: false
+      minimum: 1
+    offset:
+      type: integer
+      format: int32
+      nullable: false
+      minimum: 0
+    total:
+      type: integer
+      format: int32
+      minimum: 0
+      nullable: false
+    sort:
+      type: string
+      nullable: false
+      description: The applied sort token.
+    hasNextPage:
+      type: boolean
+      nullable: false
+    hasPreviousPage:
+      type: boolean
+      nullable: false
+    currentPage:
+      type: integer
+      format: int32
+      minimum: 1
+      nullable: false
+      description: 1-indexed page derived from offset/limit.
+    totalPages:
+      type: integer
+      format: int32
+      minimum: 1
+      nullable: false

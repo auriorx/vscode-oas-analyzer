@@ -1,0 +1,16 @@
+  Sort.{tag}:
+      description: Sort token for {tag-kebab-lower} listing.
+      type: string
+      nullable: false
+      enum:
+        - IdAsc
+        - IdDesc
+  Sort.{tag-plural}:
+      description: |
+        Sort tokens in priority order.
+      type: array
+      nullable: false
+      uniqueItems: true
+      maxItems: 5
+      items:
+        $ref: "#/components/schemas/Sort.{tag}"

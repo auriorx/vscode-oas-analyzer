@@ -1,0 +1,13 @@
+  Sort.{tag-plural}:
+      name: sort
+      in: query
+      required: false
+      style: form
+      explode: false
+      description: |
+        Sort tokens in priority order.
+        Values are provided as a comma-separated list.
+        Each field may appear at most once (e.g., do not provide both IdAsc and IdDesc).
+        Example: ?sort=IdDesc
+      schema:
+        $ref: "#/components/schemas/Sort.{tag-plural}"

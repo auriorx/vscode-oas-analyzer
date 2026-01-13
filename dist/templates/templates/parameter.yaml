@@ -1,5 +1,5 @@
   {tag}Id:
-      name: {tag-lower}Id
+      name: {tag-kebab-lower}Id
       in: path
       description: |
         The unique identifier of a {tag-lower}.

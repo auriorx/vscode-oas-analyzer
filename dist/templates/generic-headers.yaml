@@ -1,0 +1,8 @@
+      x-correlation-id:
+        description: |
+          The x-correlation-id containing an identifier for a request.
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: 661077bb-375f-4500-b5aa-0ef18807add6
