@@ -58,6 +58,9 @@ function kebab(str) {
         .replace(/\s+/g, '-')
         .toLowerCase();
 }
+function camelCase(str) {
+    return str.charAt(0).toLowerCase() + str.slice(1);
+}
 function indentYamlBlock(yaml, spaces = 2) {
     const pad = " ".repeat(spaces);
     return yaml
@@ -66,10 +69,12 @@ function indentYamlBlock(yaml, spaces = 2) {
         .join("\n");
 }
 function renderParameterTemplate(template, tag) {
+    const tagCamel = camelCase(tag);
     const tagLower = tag.toLowerCase();
     const tagKebabLower = kebab(tag);
     return template
         .replace(/{tag}/g, tag)
+        .replace(/{tag-camel}/g, tagCamel)
         .replace(/{tag-lower}/g, tagLower)
         .replace(/{tag-kebab-lower}/g, tagKebabLower);
 }

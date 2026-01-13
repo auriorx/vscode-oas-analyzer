@@ -11,8 +11,12 @@ function kebab(str) {
         .replace(/\s+/g, '-')
         .toLowerCase();
 }
+function camelCase(str) {
+    return str.charAt(0).toLowerCase() + str.slice(1);
+}
 function renderPathTemplate(template, tag) {
     const tagPlural = pluralize_1.default.plural(tag);
+    const tagCamel = camelCase(tag);
     const tagLower = tag.toLowerCase();
     const tagPluralLower = tagPlural.toLowerCase();
     const tagKebab = kebab(tag);
@@ -22,6 +26,7 @@ function renderPathTemplate(template, tag) {
     const replacements = {
         '{tag}': tag,
         '{tag-plural}': tagPlural,
+        '{tag-camel}': tagCamel,
         '{tag-kebab}': tagKebab,
         '{tag-kebab-lower}': tagKebabLower,
         '{tag-kebab-plural}': tagKebabPlural,

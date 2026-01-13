@@ -12,6 +12,10 @@ function kebab(str: string): string {
     .toLowerCase();
 }
 
+function camelCase(str: string): string {
+  return str.charAt(0).toLowerCase() + str.slice(1);
+}
+
 function indentYamlBlock(yaml: string, spaces: number = 2): string {
   const pad = " ".repeat(spaces);
   return yaml
@@ -21,10 +25,12 @@ function indentYamlBlock(yaml: string, spaces: number = 2): string {
 }
 
 function renderParameterTemplate(template: string, tag: string): string {
+  const tagCamel = camelCase(tag);
   const tagLower = tag.toLowerCase();
   const tagKebabLower = kebab(tag);
   return template
     .replace(/{tag}/g, tag)
+    .replace(/{tag-camel}/g, tagCamel)
     .replace(/{tag-lower}/g, tagLower)
     .replace(/{tag-kebab-lower}/g, tagKebabLower);
 }

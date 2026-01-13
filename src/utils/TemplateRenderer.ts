@@ -7,8 +7,13 @@ function kebab(str: string): string {
     .toLowerCase();
 }
 
+function camelCase(str: string): string {
+  return str.charAt(0).toLowerCase() + str.slice(1);
+}
+
 export function renderPathTemplate(template: string, tag: string): string {
   const tagPlural = pluralize.plural(tag);
+  const tagCamel = camelCase(tag);
   const tagLower = tag.toLowerCase();
   const tagPluralLower = tagPlural.toLowerCase();
   const tagKebab = kebab(tag);
@@ -19,6 +24,7 @@ export function renderPathTemplate(template: string, tag: string): string {
   const replacements: Record<string, string> = {
     '{tag}': tag,
     '{tag-plural}': tagPlural,
+    '{tag-camel}': tagCamel,
     '{tag-kebab}': tagKebab,
     '{tag-kebab-lower}': tagKebabLower,
     '{tag-kebab-plural}': tagKebabPlural,

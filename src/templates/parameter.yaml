@@ -1,8 +1,8 @@
   {tag}Id:
-      name: {tag-lower}Id
+      name: {tag-camel}Id
       in: path
       description: |
-        The unique identifier of a {tag-lower}.
+        The unique identifier of a {tag-camel}.
       required: true
       schema:
         type: string
